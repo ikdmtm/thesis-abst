@@ -38,46 +38,28 @@
     \supervisor{指導教員：上田隆一 准教授}
     
     \section{緒\hspace{2zw}言}%===========================
-    
-    近年、労働環境の変化に伴い、効率的で正確な勤怠管理の重要性が増している。
-    しかし、従来の勤怠管理システムでは手動での打刻が必要であり、これには出退勤毎の打刻労力や打刻忘れ等の複数の問題が存在する。
-    本研究では、これらの問題に対処するため、画像認識を用いて打刻を自動化した新たな勤怠管理システムの提案を行う。
-    従来の手法に比べ、このシステムは利用者にとって手間を軽減し、データの客観性を向上させることが期待される。
-    本論文では、まず勤怠管理の現状に焦点を当て、次に提案手法の詳細とその効果について述べる。
-    最後に、本研究の構成や進行方針について説明する。
+
+    近年，労働環境の変化に伴い，効率的で正確な勤怠管理の重要性が増している．
+    従来の勤怠管理システムでは，打刻に生態認証や顔認証を導入するなどして，データの客観性を高められている．
+    しかし，従来の勤怠管理システムは，ほとんどが手動での打刻が必要であり，これには出退勤毎の打刻労力や打刻忘れ等の問題が存在する．\\
+    　本研究では，これらの問題に対処するために，YOLOv8\cite{Ultralitics2023}による画像認識で打刻を自動化した勤怠管理システムの提案を行う．
+    YOLOv8は物体検出アルゴリズムの一つでリアルタイムでの物体検出によく用いられている．
+    これはYOLOは画像を一度だけ見て物体の位置とクラスを同時に予測することで，高速な物体検出ができるためである．\\
+    　これらの特徴を利用して，リアルタイムでカメラ画像から人物を検出することで打刻を自動化する．
+    打刻を自動化することで，従来の手動で打刻をする手法に比べ，利用者にとって手間を軽減し，データの客観性を向上させることが期待される．
 
     \section{提案手法}%===========================
      
-    \section{実装}%===========================
+    \section{実験と評価}%===========================
       
     \section{結\hspace{2zw}言}%===========================
 
     \vspace{5truemm}
     {\footnotesize
         \begin{thebibliography}{99}
-            
-    %         \bibitem{工大2005}
-    %         工大太郎: ``ロボットのしくみ'', 
-    %         日本機械学会論文誌A, 
-    %         Vol.~108, No.~1034 (2005), pp.~1--2.
-            
-    %         \bibitem{Shibutani2004}
-    %         Y. Shibutani: ``Heinrich's Law Resulted Pattern Dynamics --Part2--''，
-    %         Proceedings of the 79th Kansai Branch Regular Meeting of the Japan Society of Mechanical Engineers,  
-    %         No.~04--05 (2004), pp.~205--206.
-            
-    %         \bibitem{Handbook1979}
-    %         The Japan Society of Mechanical Engineers ed.: ``JSME Date Handbook: Heat Transfer'', 
-    %         (1979), p.~123, The Japan Society of Mechanical Engineers.
-            
-    %         \bibitem{Kikuchi2017}
-    %         K. Kikuchi, M. Miura, K. Shibata, J. Yamamura: ``Soft Landing Condition for Stair-climbing Robot with Hopping Mechanism'', 
-    %         Journal of JSDE, Vol.~53, No.~8 (2018), pp.~605--614, \url{https://doi.org/10.14953/jjsde.2017.2774}.
-            
-    %         \bibitem{Adrobo2019}
-    %         千葉工業大学 未来ロボティクス学科 学科概要: 
-    %         \url{http://www.robotics.it-chiba.ac.jp/ja/subject/index.html}， 
-    %         （参照日 2023年1月29日）. 
+
+            \bibitem{Ultralitics2023}
+            Ultralytics (2023) ultralytics [Source code]. \url{https://github.com/ultralytics/ultralytics.}
             
         \end{thebibliography}
     }
