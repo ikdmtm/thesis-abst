@@ -1,13 +1,15 @@
-b-thesis_abst.pdf: b-thesis_abst.dvi
-	dvipdfmx -f font.map tmp.dvi
-	mv tmp.pdf b-thesis_abst.pdf
+main.pdf: main.dvi
+	dvipdfmx -f font.map main.dvi
 
-b-thesis_abst.dvi: *.tex
-	sed -e 's/。/．/g' -e 's/、/，/g' b-thesis_abst.tex > tmp.tex
+main.dvi: *.tex
+	sed -e 's/。/. /g' -e 's/、/, /g' main.tex > tmp.tex
 	platex tmp.tex
-	#pbibtex tmp.aux
+#	pbibtex tmp.aux
+#	mendex tmp
 	platex tmp.tex
 	platex tmp.tex
+	platex tmp.tex
+	mv tmp.dvi main.dvi
 
 clean:
-	rm -f *.aux *.log *.dvi *.bbl *.blg *.pdf *.ilg *.idx *.toc *.ind
+	rm -f *.aux *.log *.dvi *.bbl *.blg *.ilg *.idx *.toc *.ind tmp.*
