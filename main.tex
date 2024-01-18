@@ -23,13 +23,16 @@
     
     \makeatother
     
-    \abstract{We propose an automated the attendance management system.
+    \abstract{
+    We propose an automated the attendance management system.
     Conventional attendance management systems require manual time stamping.
     This leads to problems such as the effort involved in stamping for each entry and exit.
     Additionally, there is a possibility of forgetting to stamp.
     To avoid this problem, we attempt to use image recognition to automate the time stamping process.
     The proposed method detects attendance and departure by employing image recognition to detect each person.
-    Automating the time stamping process has resulted in a reduction in effort for each entry and exit, and forgetting to stamp was prevented.}
+    As the result of experiments, 
+    we confirmed that the system we built can automatically perform everything from person detection to data uploading to the application.
+    }
     
     \keywords{Attendance management system, Automated time stamping, Real-time object detection}
     
@@ -96,7 +99,7 @@ PCはWindows10でRAMが32GBのものを用いる。
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.8\linewidth]{fig/frame.png}
+    \includegraphics[width=0.8\linewidth]{fig/frame3.png}
     \caption{Image acquisition}
     \label{Image acquisition}
     \end{figure}
@@ -121,7 +124,7 @@ PCはWindows10でRAMが32GBのものを用いる。
 % 図3のように、アプリ上でデータを確認することができ、データがアップロードできていることが分かる。
 
 指定した時間に自動でアプリ上にデータをアップロードすることができるか実験する。
-\ref{experiment1}の実験で保存された画像データから、出退勤時の画像とそれに紐づく日時データを取り出す。
+\ref{experiment1}節で保存された画像データから、出退勤時の画像とそれに紐づく日時データを取り出す。
 取り出したデータを指定した時間にアプリでHTTPリクエストを送り、
 データベースに保存する。
 画像を取り出してアプリにリクエストを送るプログラムを、指定した時間に実行することで、
@@ -129,7 +132,7 @@ PCはWindows10でRAMが32GBのものを用いる。
 プログラムを実行した結果、図\ref{application}のように、アプリ上でデータを確認することができ、データがアップロードできていることが分かる。
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=1.0\linewidth]{fig/application.png}
+    \includegraphics[width=1.0\linewidth]{fig/application3.png}
     \caption{management application}
     \label{application}
     \end{figure}
