@@ -25,11 +25,11 @@
     
     \abstract{We propose an automated the attendance management system.
     Conventional attendance management systems require manual time stamping.
-    leading to problems such as the effort involved in stamping for each entry and exit,
-    and the possibility of forgetting to stamp.
+    This leads to problems such as the effort involved in stamping for each entry and exit.
+    Additionally, there is a possibility of forgetting to stamp.
     To avoid this problem, we attempt to use image recognition to automate the time stamping process.
-    The proposed method detects attendance and departure by employing image recognition to detect person.
-    Automating the time stamping process has resulted in a reduction in effort for each entry and exit, and an improvement in the objectivity of the data.}
+    The proposed method detects attendance and departure by employing image recognition to detect each person.
+    Automating the time stamping process has resulted in a reduction in effort for each entry and exit, and forgetting to stamp was prevented.}
     
     \keywords{Attendance management system, Automated time stamping, Real-time object detection}
     
@@ -43,12 +43,12 @@
 データの客観性が高められている．
 しかし，ほとんどの勤怠管理システムは手動での打刻が必要であり，
 手動打刻には出退勤毎の打刻労力や打刻忘れ等の問題が存在する．\par
-本研究では，これらの問題に対処するためにYOLOv8\cite{Ultralitics2023}による画像認識で打刻を自動化した勤怠管理システムの提案を行う．
+本研究では，これらの問題に対処するためにYOLOv8\cite{Ultralitics}による画像認識で打刻を自動化した勤怠管理システムを提案する．
 YOLOv8は物体検出アルゴリズムの一つで，
 リアルタイムでの物体検出によく用いられている．
 これはYOLOが画像を一度だけ見て物体の位置とクラスを同時に予測することで
 高速な物体検出ができるためである．\par
-これらの特徴を利用して，リアルタイムでカメラ画像から人物を検出することで打刻を自動化する．
+これらの特徴を利用して，リアルタイムでカメラ画像から人物を検出し、それらのタイミングを打刻とすることで打刻を自動化する．
 打刻を自動化することで，従来の手動で打刻をする手法に比べ，利用者にとって手間を軽減し，打刻忘れを防止することができると考えられる．
 
     \section{構築するシステム}%===========================
@@ -57,14 +57,14 @@ YOLOv8は物体検出アルゴリズムの一つで，
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.7\linewidth]{fig/composition.png}
+\includegraphics[width=0.8\linewidth]{fig/composition.png}
 \caption{System configuration}
 \label{configuration}
 \end{figure}
 
     \subsection{入退室する人物の検出}
 設置されたカメラを指定した時間だけ起動しておき、カメラ映像を約0.2秒毎に画像で取得する。
-取得した画像からYOLOv8を用いて人物の検出を行う。
+取得した画像からYOLOv8を用いて人物を検出する。
 画像から人物が検出された場合のみ画像を保存する。
 その日保存された最初の画像と最後の画像が保存された時間をそれぞれ出勤時間、
 退勤時間とする。
@@ -78,8 +78,8 @@ YOLOv8は物体検出アルゴリズムの一つで，
     \section{実験}%===========================
 実機を用いて図\ref{configuration}のシステムを構築し、
 人物の検出からデータのアップロードまで動作可能か検証する。
-検証に使用するカメラはIntel Realsense Depth Camera D405、
-PCはWindows10でRAM 32GBのものを用いる。
+検証に使用するカメラはIntel Realsense Depth Camera D405\cite{camera}、
+PCはWindows10でRAMが32GBのものを用いる。
 
     \subsection{入退室する人物の検出}
     \label{experiment1}
@@ -87,19 +87,33 @@ PCはWindows10でRAM 32GBのものを用いる。
 
 入退室時に人物が検出できるか実験する。
 部屋の出入り口にカメラを設置する。
-人物検出のモデルを指定した時間動かしておき、常に人物の検出を行う。
+人物検出のモデルを指定した時間の間動かしておき、常に人物の検出を行う。
 人物が検出された際は、その画像を保存する。
 % 人物検出と保存までできているかの実験
 
-図\ref{Person detection experiment}からカメラからの映像を約0.2秒毎に画像で取得し、
-人物が画像内に写った場合、人物検出ができていることが分かる。
+図\ref{Image acquisition}から、カメラからの映像を約0.2秒毎に画像で取得できていることがわかる。
+また、図\ref{person detection}から人物が画像内に写った場合、人物検出ができていることがわかる。
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=1.0\linewidth]{fig/experiment1.png}
-    \caption{Person detection experiment}
-    \label{Person detection experiment}
+    \includegraphics[width=0.8\linewidth]{fig/frame.png}
+    \caption{Image acquisition}
+    \label{Image acquisition}
     \end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{fig/boundingbox.png}
+    \caption{person detection}
+    \label{person detection}
+    \end{figure}
+
+    \subsection{検出可能な歩行速度}
+    入退室時のカメラ前を通る速度を上げた場合にも人物の検出が可能か実験する。
+    ３つの速度について実験を行った。
+    一般的な歩行速度の1.3~m/s、早歩きの速度の1.9~m/s、走る速度の2.2~m/sでの入退室をそれぞれ10回繰り返し、人物検出ができるか確認した。 
+    実験の結果、すべての入退室で人物を検出することができた。
+
 
     \subsection{データのアップロード}
 % 人物を検出した際に保存された画像データと日時データを
@@ -107,27 +121,45 @@ PCはWindows10でRAM 32GBのものを用いる。
 % 図3のように、アプリ上でデータを確認することができ、データがアップロードできていることが分かる。
 
 指定した時間に自動でアプリ上にデータをアップロードすることができるか実験する。
-\ref{experiment1}で保存された画像データとそれに紐づく日時データを指定した時間にアプリにHTTPリクエストを送り、
+\ref{experiment1}の実験で保存された画像データから、出退勤時の画像とそれに紐づく日時データを取り出す。
+取り出したデータを指定した時間にアプリでHTTPリクエストを送り、
 データベースに保存する。
-図3(追加予定)のように、アプリ上でデータを確認することができ、データがアップロードできていることが分かる。
+画像を取り出してアプリにリクエストを送るプログラムを指定した時間に実行することで自動アップロードを実現する。
+プログラムを実行した結果、図\ref{application}のように、アプリ上でデータを確認することができ、データがアップロードできていることが分かる。
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{fig/application.png}
+    \caption{management application}
+    \label{application}
+    \end{figure}
 
 % ４章評価
 % テーブルでできることを一覧にするマルバツで
+% \section{評価}%===========================
+% テーブルで表にまとめる
 
     \section{結\hspace{2zw}言}%===========================
 本研究では、YOLOv8で人物検出をすることで、
 画像認識を用いた自動打刻の勤怠管理システムを提案した。
-実験より、システムが動作可能なことを確認した。
+実験より、人物検出からアプリへのデータのアップロードまでを自動的に行うシステムが動作可能なことを確認した。
 
-    \vspace{1truemm}
+% もう少し書く
+    \vspace{5truemm}
     {\footnotesize
         \begin{thebibliography}{99}
 
-            \bibitem{Ultralitics2023}
-            Ultralytics (2023) ultralytics [Source code]. \url{https://github.com/ultralytics/ultralytics.}
-        
+            \bibitem{Ultralitics}
+            Ultralytics YOLOv8: 
+            \url{https://github.com/ultralytics/ultralytics}, 
+            （参照日 2023年12月17日）.
+
+            \bibitem{camera}
+            Intel Realsense Depth Camera D405: 
+            \url{https://www.intelrealsense.com/depth-camera-d405/}, 
+            （参照日 2023年12月17日）.
+
         \end{thebibliography}
     }
     \normalsize
-    
+
 \end{document}
