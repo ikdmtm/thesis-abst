@@ -60,7 +60,7 @@ YOLOv8は物体検出アルゴリズムの一つで，
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.8\linewidth]{fig/composition.png}
+\includegraphics[width=0.8\linewidth]{fig/system.png}
 \caption{System configuration}
 \label{configuration}
 \end{figure}
@@ -126,8 +126,8 @@ PCはWindows10でRAMが32GBのものを用いる。
 指定した時間に自動でアプリ上にデータをアップロードすることができるか実験する。
 3・1節で保存された画像データから、
 出退勤時の画像とそれに紐づく日時データを取り出す。
-取り出したデータを指定した時間にアプリでHTTPリクエストを送り、
-データベースに保存する。
+指定した時間にアプリへHTTPリクエストを送り、
+取り出したデータをデータベースに保存する。
 画像を取り出してアプリにリクエストを送るプログラムを、指定した時間に実行することで、
 自動アップロードを実現する。
 プログラムを実行した結果、図\ref{application}のように、アプリ上でデータを確認することができ、データがアップロードできていることがわかる。
